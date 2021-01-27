@@ -4,9 +4,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairWest, function (spri
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     energy = 1
 })
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    game.over(false)
-})
 let beak: Sprite = null
 let energy = 0
 energy = 0
@@ -76,7 +73,7 @@ game.onUpdateInterval(1000, function () {
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(beak, sprites.dungeon.stairEast)
         if (energy == 0) {
-            beak.follow(mySprite, 100)
+            beak.follow(mySprite, 500)
         } else {
         	
         }
