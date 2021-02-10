@@ -22,24 +22,28 @@ sprites.onOverlap(SpriteKind.Food, SpriteKind.Enemy, function (sprite, otherSpri
         . . . . f f f f f f f . . . . . 
         . . . . . . f f f f f . . . . . 
         `],
-    100,
+    500,
     false
     )
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    energy = 1
+    energy = 2
+    sword.follow(mySprite)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    if (energy == 0) {
+    if (energy > 1) {
+        pause(500)
         beak.destroy()
     } else {
         game.over(false)
     }
 })
 let beak: Sprite = null
+let mySprite: Sprite = null
+let sword: Sprite = null
 let energy = 0
 energy = 0
-let sword = sprites.create(img`
+sword = sprites.create(img`
     . 6 6 . . . . . . . . . . . . . 
     . 6 9 6 . . . . . . . . . . . . 
     . . 6 9 6 . . . . . . . . . . . 
@@ -59,7 +63,7 @@ let sword = sprites.create(img`
     `, SpriteKind.Food)
 let time = 3
 scene.setBackgroundColor(1)
-let mySprite = sprites.create(img`
+mySprite = sprites.create(img`
     . . . . 5 5 5 5 5 5 . . . . . . 
     . . . 5 5 5 5 5 5 5 5 . . . . . 
     . . . 5 5 5 5 5 5 5 5 . . . . . 
@@ -77,7 +81,7 @@ let mySprite = sprites.create(img`
     . . f f f f f f f f f . . . . . 
     . . f f f f f f f f f . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(mySprite, 150, 150)
+controller.moveSprite(mySprite, 100, 100)
 scene.setBackgroundColor(1)
 tiles.setTilemap(tilemap`level1`)
 tiles.placeOnRandomTile(mySprite, sprites.dungeon.stairEast)
@@ -105,6 +109,6 @@ game.onUpdateInterval(1000, function () {
             . . . . . . f f f f . . . . . . 
             `, SpriteKind.Enemy)
         tiles.placeOnRandomTile(beak, sprites.dungeon.stairEast)
-        beak.follow(mySprite, 105)
+        beak.follow(mySprite)
     }
 })
